@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="en">
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <meta charset="UTF-8"/>
+    <title th:text="${title}"></title>
+</head>
+<body>
+<div class="container">
+    <ul class="nav bg-dark">
+        <li class="nav-item">
+            <img th:src="@{/spring-img.png}" style="width:3em; padding:7px" class="px-auto">
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/actividad/list}">Lista registro actividades extracurriculares</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/deseo/list}">Lista de deseos electrodomesticos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/salidas/list}">Registro de gastos de salidas</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/publicacion/list}">Publicacion</a>
+        </li>
+    </ul>
+    <h1 class="text-success border border-primary" th:text="${title}"></h1>
+
+    <a th:href="@{/actividad/form}" class="btn btn-success btn-xs">Crear actividad</a> <!--Cambiar el nombre del boton-->
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Fecha</th> <!--Nuevo campo en la tabla donde indique que dato va-->
+            <th>Actividad</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="actividad: ${actividades}">
+            <td th:text="${actividad.id}"></td>
+            <td th:text="${actividad.fecha}"></td> <!--agrege un nuevo campo de texto con name-->
+            <td th:text="${actividad.actividad}"></td>
+            <td><a class="btn btn-primary btn-xs" th:href="@{/actividad/form/} + ${actividad.id}" th:text="'Editar'"></a></td>
+            <td><a class="btn btn-danger btn-xs" th:href="@{/actividad/delete/} + ${actividad.id}" th:text="'Eliminar'" onclick="return confirm('¿Estás seguro que quieres eliminar?')"></a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+</html>
